@@ -1,4 +1,15 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
+{-|
+Module      : Game.GoreAndAsh.Actor.State
+Description : State of actor core module
+Copyright   : (c) Anton Gushcha, 2015-2016
+License     : BSD3
+Maintainer  : ncrashed@gmail.com
+Stability   : experimental
+Portability : POSIX
+
+Internal state of actor core module.
+-}
 module Game.GoreAndAsh.Actor.State(
     ActorState(..)
   , emptyActorState
@@ -13,7 +24,9 @@ import qualified Data.Sequence as S
 
 import Game.GoreAndAsh.Actor.TypeRep
 
--- | Inner state of actor module
+-- | Inner state of actor module.
+--
+-- [@s@] - State of next module, the states are chained via nesting.
 data ActorState s = ActorState {
   -- | Stores messages for actor with specified id
   --

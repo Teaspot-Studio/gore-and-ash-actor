@@ -1,3 +1,12 @@
+{-|
+Module      : Game.GoreAndAsh.Actor
+Description : Module that contains actor API for Gore&Ash
+Copyright   : (c) Anton Gushcha, 2015-2016
+License     : BSD3
+Maintainer  : ncrashed@gmail.com
+Stability   : experimental
+Portability : POSIX
+-}
 module Game.GoreAndAsh.Actor.Indexed(
     GameWireIndexed(..)
   , GameActor

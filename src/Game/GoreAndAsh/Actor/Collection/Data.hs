@@ -1,3 +1,12 @@
+{-|
+Module      : Game.GoreAndAsh.Actor.Collection.Data
+Description : Handling dynamic collections of actors
+Copyright   : (c) Anton Gushcha, 2015-2016
+License     : BSD3
+Maintainer  : ncrashed@gmail.com
+Stability   : experimental
+Portability : POSIX
+-}
 module Game.GoreAndAsh.Actor.Collection.Data(
     DynCollection(..)
   , ElementWithId(..)
@@ -17,7 +26,7 @@ import qualified Data.HashMap.Strict as H
 import qualified Data.Sequence as S 
 
 -- | Dynamic collection for control wire that automates handling collections of
--- FRP actors. Ther class defines minimum set of actions that collection should support
+-- FRP actors. The class defines minimum set of actions that collection should support
 -- to be used as base for collection of actors.
 class (Filterable c, F.Foldable c, Functor c, Traversable c) => DynCollection c where
   -- | Instance specific constraint for appending function

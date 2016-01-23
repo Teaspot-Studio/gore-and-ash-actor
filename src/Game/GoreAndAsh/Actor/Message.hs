@@ -1,3 +1,12 @@
+{-|
+Module      : Game.GoreAndAsh.Actor
+Description : Typeclass for type of actor message
+Copyright   : (c) Anton Gushcha, 2015-2016
+License     : BSD3
+Maintainer  : ncrashed@gmail.com
+Stability   : experimental
+Portability : POSIX
+-}
 module Game.GoreAndAsh.Actor.Message(
     ActorMessage(..)
   , actorFingerprint

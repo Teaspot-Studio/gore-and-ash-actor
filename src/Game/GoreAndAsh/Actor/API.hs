@@ -1,7 +1,18 @@
+{-|
+Module      : Game.GoreAndAsh.Actor.API
+Description : Monadic and arrow API for actor core module
+Copyright   : (c) Anton Gushcha, 2015-2016
+License     : BSD3
+Maintainer  : ncrashed@gmail.com
+Stability   : experimental
+Portability : POSIX
+
+Module that contains monadic and arrow API of actor module.
+-}
 module Game.GoreAndAsh.Actor.API(
     ActorMonad(..)
   , ActorException(..)
-  -- | Message API
+  -- * Message API
   , actorSend
   , actorSendMany
   , actorSendDyn
@@ -9,12 +20,12 @@ module Game.GoreAndAsh.Actor.API(
   , actorProcessMessages
   , actorProcessMessagesM
   , actorMessages
-  -- | Actor API
+  -- * Actor API
   , makeActor
   , makeFixedActor
   , runActor
   , runActor'
-  -- | Helpers for libraries
+  -- * Helpers for libraries
   , getActorFingerprint
   ) where
 
@@ -44,7 +55,7 @@ data ActorException =
 
 instance Exception ActorException
 
--- | Low level API for module
+-- | Low level monadic API for module.
 class MonadThrow m => ActorMonad m where 
   -- | Registers new actor in message system
   actorRegisterM :: ActorMessage i => m i 
@@ -63,6 +74,7 @@ class MonadThrow m => ActorMonad m where
     => i -> ActorMessageType i -> m ()
 
   -- | Get all messages that were collected for given actor's id
+  --
   -- Note: Doesn't clears the queue
   actorGetMessagesM :: (ActorMessage i, Typeable (ActorMessageType i))
     => i -> m (S.Seq (ActorMessageType i))
