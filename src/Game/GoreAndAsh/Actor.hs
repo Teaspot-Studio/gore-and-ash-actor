@@ -111,6 +111,7 @@ module Game.GoreAndAsh.Actor(
   , runActor'
   -- ** Helpers for libraries
   , getActorFingerprint
+  , actorFingerprint
   -- * Message API
   , actorSend
   , actorSendMany
