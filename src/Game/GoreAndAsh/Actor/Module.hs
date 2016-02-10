@@ -18,6 +18,7 @@ module Game.GoreAndAsh.Actor.Module(
 import Control.Monad.Catch
 import Control.Monad.Fix 
 import Control.Monad.State.Strict
+import Data.Proxy 
 
 import Game.GoreAndAsh
 import Game.GoreAndAsh.Actor.State
@@ -55,5 +56,5 @@ instance GameModule m s => GameModule (ActorT s m) (ActorState s) where
 
   newModuleState = emptyActorState <$> newModuleState
 
-  withModule _ = id
+  withModule _ = withModule (Proxy :: Proxy m)
   cleanupModule _ = return ()
