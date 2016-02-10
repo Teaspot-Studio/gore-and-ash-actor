@@ -1,0 +1,3 @@
+stack upload .
+sudo docker build -t gore-and-ash-actor .
+sudo docker run -it --rm gore-and-ash-actor
