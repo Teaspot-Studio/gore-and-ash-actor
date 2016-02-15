@@ -15,9 +15,12 @@ module Game.GoreAndAsh.Actor.Module(
     ActorT(..)
   ) where
 
+import Control.Monad.Base
 import Control.Monad.Catch
 import Control.Monad.Fix 
+import Control.Monad.Error.Class
 import Control.Monad.State.Strict
+import Control.Monad.Trans.Resource
 import Data.Proxy 
 
 import Game.GoreAndAsh
@@ -43,8 +46,14 @@ import Game.GoreAndAsh.Actor.State
 -- The module is pure within first phase (see 'ModuleStack' docs) but requires 'MonadThrow'
 -- instance of end monad, therefore currently only 'IO' end monad can handler the module.
 newtype ActorT s m a = ActorT { runActorT :: StateT (ActorState s) m a }
-  deriving (Functor, Applicative, Monad, MonadState (ActorState s), MonadFix, MonadTrans, MonadIO, MonadThrow, MonadCatch, MonadMask)
+  deriving (Functor, Applicative, Monad, MonadState (ActorState s), MonadFix, MonadTrans, MonadIO, MonadThrow, MonadCatch, MonadMask, MonadError e)
 
+instance MonadBase IO m => MonadBase IO (ActorT s m) where 
+  liftBase = ActorT . liftBase
+
+instance MonadResource m => MonadResource (ActorT s m) where 
+  liftResourceT = ActorT . liftResourceT
+  
 instance GameModule m s => GameModule (ActorT s m) (ActorState s) where 
   type ModuleState (ActorT s m) = ActorState s
   runModule (ActorT m) s = do
